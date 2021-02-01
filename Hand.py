@@ -9,6 +9,7 @@ class Hand:
         self.masked=masked
         self.frame=frame
         self.thresh = thresh
+        self.area=0
         self.outline = self.drawOutline()
         self.fingerTip = self.findFingertip()
     
@@ -21,6 +22,7 @@ class Hand:
             area = cv.contourArea(c)
             if area>palmArea:
                 palmArea=area
+                self.area = area
                 flag=i
         if flag is not None and palmArea>min_area:
             self.contour,cnt = contour[flag],contour[flag]

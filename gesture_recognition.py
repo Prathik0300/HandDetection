@@ -2,6 +2,20 @@ import cv2 as cv
 import numpy as np
 from Hand import Hand
 import time
+def detect_face(frame, block=False, colour=(0, 0, 0)):
+    fill = [1, -1][block]
+    face_cascade = cv.CascadeClassifier(
+        cv.data.haarcascades + 'haarcascade_frontalface_default.xml')
+
+    gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+    faces = face_cascade.detectMultiScale(gray, 1.1, 5)
+    area = 0
+    X = Y = W = H = 0
+    for (x, y, w, h) in faces:
+        if w * h > area:
+            area = w * h
+            X, Y, W, H = x, y, w, h
+    cv.rectangle(frame, (X, Y), (X + W, Y + H+20), colour, fill)
 
 def capture_histogram():
     video = cv.VideoCapture(0)
