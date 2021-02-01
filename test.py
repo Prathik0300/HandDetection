@@ -1,8 +1,6 @@
 import cv2 as cv
 import numpy as np
 import gesture_recognition as gr
-count=1
-
 
 
 if __name__ == '__main__':
